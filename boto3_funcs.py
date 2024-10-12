@@ -57,3 +57,23 @@ def upload_file(client,
         logging.error(e)
         return False
     return True
+
+
+def get_file(client,
+                file_name,
+                bucket,
+                object_name=None):
+    """download a file to an S3 bucket
+    :param s3 client
+    :param file_name: File to download
+    :param bucket: Bucket to download from
+    :param object_name: S3 object name. If not specified then file_name is used
+    :return: file if file was downloaded, else False
+    """ 
+    # Upload the file
+    try:
+        response = client.download_file('amzn-s3-demo-bucket', 'OBJECT_NAME', 'FILE_NAME')
+    except ClientError as e:
+        logging.error(e)
+        return False
+    return response
